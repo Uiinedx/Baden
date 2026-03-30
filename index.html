@@ -150,10 +150,15 @@
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
-      background-size: cover;
-      background-position: center top;
-      background-attachment: fixed;
+      /* Gradient landscape representing Núi Bà Đen */
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 70%, rgba(26,61,43,0.7) 0%, transparent 70%),
+        linear-gradient(180deg,
+          #0d2137 0%,
+          #1a4a6b 25%,
+          #2d6a4f 55%,
+          #1a3d2b 100%
+        );
       transform: scale(1.05);
       transition: transform 0.1s linear;
     }
@@ -342,9 +347,7 @@
     }
     .about-card-main .visual-fill {
       width: 100%; height: 100%;
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
-      background-size: cover;
-      background-position: center;
+      background: linear-gradient(160deg, #2d6a4f 0%, #1a3d2b 40%, #0d2137 100%);
       position: relative; overflow: hidden;
     }
     /* Mountain layers inside about card */
@@ -401,22 +404,20 @@
     .feature-bg {
       position: absolute; inset: 0;
       transition: transform 0.5s;
-      background-size: cover;
-      background-position: center;
     }
     .feature-card:hover .feature-bg { transform: scale(1.06); }
-    /* Individual card backgrounds - replaced with real Núi Bà Đen photos */
+    /* Individual card backgrounds */
     .feature-card:nth-child(1) .feature-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(160deg, #1a4a6b 0%, #0d2137 100%);
     }
     .feature-card:nth-child(2) .feature-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(160deg, #2d6a4f 0%, #1a3d2b 100%);
     }
     .feature-card:nth-child(3) .feature-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(160deg, #8b5e3c 0%, #4a2c0a 100%);
     }
     .feature-card:nth-child(4) .feature-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(160deg, #1a3d2b 0%, #2d6a4f 60%, #48cae4 100%);
     }
     /* Visual elements within each card */
     .feature-card:nth-child(1) .feature-bg::after {
@@ -531,21 +532,18 @@
     .slide-bg {
       width: 100%; height: 100%;
       transition: transform 0.6s;
-      background-size: cover;
-      background-position: center;
     }
-    /* Replaced with real Núi Bà Đen photos */
     .slide:nth-child(1) .slide-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(135deg, #0d2137 0%, #1a4a6b 40%, #2d6a4f 100%);
     }
     .slide:nth-child(2) .slide-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(135deg, #1a3d2b 0%, #2d6a4f 50%, #52b788 100%);
     }
     .slide:nth-child(3) .slide-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(135deg, #4a2c0a 0%, #8b5e3c 50%, #c9a84c 100%);
     }
     .slide:nth-child(4) .slide-bg {
-      background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg');
+      background: linear-gradient(135deg, #0d2137 0%, #48cae4 60%, #1a3d2b 100%);
     }
     .slide-emoji {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
@@ -597,17 +595,14 @@
     .gallery-card-inner {
       width: 100%; height: 100%;
       transition: transform 0.4s;
-      background-size: cover;
-      background-position: center;
     }
     .gallery-card:hover .gallery-card-inner { transform: scale(1.08); }
-    /* Replaced with real Núi Bà Đen photos */
-    .gallery-card:nth-child(1) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
-    .gallery-card:nth-child(2) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
-    .gallery-card:nth-child(3) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
-    .gallery-card:nth-child(4) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
-    .gallery-card:nth-child(5) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
-    .gallery-card:nth-child(6) .gallery-card-inner { background-image: url('https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg'); }
+    .gallery-card:nth-child(1) .gallery-card-inner { background: linear-gradient(135deg, #1a4a6b, #2d6a4f); }
+    .gallery-card:nth-child(2) .gallery-card-inner { background: linear-gradient(135deg, #2d6a4f, #52b788); }
+    .gallery-card:nth-child(3) .gallery-card-inner { background: linear-gradient(135deg, #0d2137, #1a3d2b); }
+    .gallery-card:nth-child(4) .gallery-card-inner { background: linear-gradient(135deg, #4a2c0a, #c9a84c); }
+    .gallery-card:nth-child(5) .gallery-card-inner { background: linear-gradient(135deg, #1a3d2b, #48cae4); }
+    .gallery-card:nth-child(6) .gallery-card-inner { background: linear-gradient(135deg, #0d2137, #2d6a4f); }
     .gallery-card-emoji {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       font-size: 3.5rem;
@@ -1394,42 +1389,42 @@
       title: 'Cáp treo kỷ lục Đông Nam Á',
       body: 'Hệ thống cáp treo Sun World Ba Den Mountain gồm 3 tầng với tổng chiều dài lên tới 3,6 km, đạt kỷ lục cáp treo 3 tầng dài nhất Đông Nam Á. Từ ca bin, du khách có thể ngắm nhìn toàn cảnh rừng cây xanh mướt, những làn mây trắng bay lượn và đỉnh núi sừng sững ở phía trên.',
       emoji: '🚡',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #0d2137 0%, #1a4a6b 100%)'
     },
     temple: {
       tag: 'Tâm linh',
       title: 'Chùa Điện Bà linh thiêng',
       body: 'Chùa Điện Bà – hay còn gọi là điện thờ Linh Sơn Thánh Mẫu – được xây dựng từ thế kỷ 18, nằm ở lưng chừng núi ở độ cao 380m. Đây là ngôi chùa linh thiêng nhất miền Nam, mỗi năm đón hàng triệu phật tử và du khách về chiêm bái, đặc biệt trong mùa lễ hội đầu năm.',
       emoji: '🛕',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #2d6a4f 0%, #1a3d2b 100%)'
     },
     peak: {
       tag: 'Chinh phục',
       title: 'Đỉnh núi 986m hùng vĩ',
       body: 'Từ đỉnh Núi Bà Đen, du khách có thể phóng tầm mắt bao quát toàn bộ vùng đồng bằng Nam Bộ với tầm nhìn 360 độ. Vào những ngày trong xanh, có thể nhìn thấy tận Thành phố Hồ Chí Minh và các tỉnh lân cận. Khu vực đỉnh núi cũng là nơi đặt công viên đỉnh Sun World với nhiều trò chơi và khu vui chơi giải trí.',
       emoji: '⛰️',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #8b5e3c 0%, #4a2c0a 100%)'
     },
     sunset: {
       tag: 'Thiên nhiên',
       title: 'Hoàng hôn huyền ảo trên đỉnh mây',
       body: 'Cảnh hoàng hôn trên Núi Bà Đen là một trong những khoảnh khắc thiên nhiên kỳ vĩ nhất Việt Nam. Khi mặt trời lặn, bầu trời chuyển màu từ vàng cam sang đỏ hồng, mây trắng bồng bềnh phủ ngang sườn núi tạo nên khung cảnh như chốn bồng lai tiên cảnh.',
       emoji: '🌅',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #1a3d2b 0%, #c9a84c 100%)'
     },
     forest: {
       tag: 'Hệ sinh thái',
       title: 'Rừng xanh nguyên sinh',
       body: 'Núi Bà Đen được bao phủ bởi những cánh rừng nhiệt đới nguyên sinh với hàng trăm loài thực vật và động vật. Những con đường trekking xuyên rừng đưa du khách khám phá hệ sinh thái phong phú, suối thác trong vắt và không khí mát lành dưới tán cây cổ thụ.',
       emoji: '🌿',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #1a3d2b 0%, #2d6a4f 100%)'
     },
     cloud: {
       tag: 'Phong cảnh',
       title: 'Biển mây huyền bí',
       body: 'Vào buổi sáng sớm hoặc sau những cơn mưa, núi Bà Đen thường được bao phủ bởi những làn mây trắng mờ ảo tạo nên cảnh quan "biển mây" ngoạn mục. Đứng trên đỉnh nhìn xuống, cả vùng đồng bằng biến mất trong biển mây, chỉ còn lại đỉnh núi chơi vơi giữa trời đất.',
       emoji: '☁️',
-      bg: 'url("https://saigontastetours.com/wp-content/uploads/2024/02/black-virgin-mountain.jpg") no-repeat center/cover'
+      bg: 'linear-gradient(135deg, #0d2137 0%, #48cae4 100%)'
     }
   };
   /* ===========================
@@ -1624,3 +1619,5 @@
 </script>
 </body>
 </html>
+
+
