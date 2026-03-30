@@ -1,339 +1,1326 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Núi Bà Đen – Nóc nhà Nam Bộ. Khám phá vẻ đẹp thiêng liêng, huyền bí của ngọn núi cao nhất miền Nam Việt Nam." />
-  <title>Núi Bà Đen – Nóc nhà Nam Bộ | Tây Ninh</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <style>
-    :root {
-      --accent: #e85d26;
-    }
-    [data-theme="dark"] {
-      --accent: #ff8c42;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .title-font {
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    /* FONT LỚN HƠN – theo yêu cầu */
-    h1 { font-size: 4.5rem; line-height: 1.05; }
-    h2 { font-size: 3rem; }
-    p { font-size: 1.25rem; line-height: 1.7; }
-
-    .container { max-width: 1280px; }
-
-    /* HERO SIÊU ĐẸP – ảnh thật + overlay */
-    .hero {
-      height: 100vh;
-      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), 
-                  url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
-      background-attachment: fixed;
-    }
-
-    /* Card hiện đại, ảnh to vừa phải */
-    .exp-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .exp-card:hover {
-      transform: translateY(-12px) scale(1.03);
-      box-shadow: 0 25px 50px -12px rgb(232 93 38);
-    }
-
-    .gallery-img {
-      transition: all 0.5s ease;
-    }
-    .gallery-img:hover {
-      transform: scale(1.08);
-      filter: brightness(1.1);
-    }
-
-    /* Progress bar */
-    #progressBar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(to right, #e85d26, #ff8c42);
-      z-index: 9999;
-      transform-origin: left;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Núi Bà Đen - Viên ngọc thiên nhiên và linh thiêng của Tây Ninh. Khám phá cáp treo, chùa Bà, đỉnh núi và hoàng hôn tuyệt đẹp.">
+    <title>Núi Bà Đen • Tây Ninh | Du lịch thiên nhiên &amp; văn hóa</title>
+    <style>
+        /* ==================== CSS VARIABLES &amp; RESET ==================== */
+        :root {
+            /* Màu chủ đạo theo yêu cầu */
+            --primary-green: #22c55e;
+            --primary-blue: #0ea5e9;
+            --accent-yellow: #fde047;
+            --bg-light: #f8fafc;
+            --text-light: #0f172a;
+            --card-bg-light: #ffffff;
+            
+            /* Dark mode */
+            --bg-dark: #0f172a;
+            --text-dark: #f1f5f9;
+            --card-bg-dark: #1e2937;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-light);
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+        
+        body.dark {
+            color: var(--text-dark);
+            background: var(--bg-dark);
+        }
+        
+        /* ==================== HEADER ==================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark header {
+            background: rgba(15, 23, 42, 0.95);
+        }
+        
+        nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(234, 179, 8, 0.1);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--accent-yellow);
+            transform: rotate(25deg);
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+        }
+        
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            height: 100vh;
+            min-height: 680px;
+            background: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.55)), 
+                        url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Parallax effect */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            background-position: center;
+            background-size: cover;
+            transition: transform 0.1s ease-out;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            color: white;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            max-width: 620px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-yellow));
+            color: #0f172a;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 16px 36px;
+            border-radius: 9999px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(134, 239, 172, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(134, 239, 172, 0.5);
+        }
+        
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* ==================== SECTION STYLES ==================== */
+        section {
+            padding: 100px 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            display: block;
+            margin: 12px auto;
+            border-radius: 4px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        /* Scroll animation base */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==================== GIỚI THIỆU SECTION ==================== */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .intro-text p {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        /* ==================== KHÁM PHÁ (CARDS) ==================== */
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background: var(--card-bg-light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body.dark .card {
+            background: var(--card-bg-dark);
+        }
+        
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(34, 197, 94, 0.25);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .card:hover img {
+            transform: scale(1.12);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ==================== TIMELINE ==================== */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-green), var(--primary-blue));
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid var(--primary-green);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 18px;
+            z-index: 2;
+            box-shadow: 0 0 0 6px rgba(134, 239, 172, 0.3);
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 1.5rem 2rem;
+            background: var(--card-bg-light);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        body.dark .timeline-content {
+            background: var(--card-bg-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+            }
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+            }
+            .timeline-content {
+                width: 100%;
+                margin-left: 60px;
+            }
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+        
+        /* ==================== GALLERY ==================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-card:hover img {
+            transform: scale(1.15);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-weight: 600;
+        }
+        
+        /* Auto slider */
+        .featured-slider {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto 4rem;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .slider-container {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-slide {
+            min-width: 100%;
+            height: 520px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 3rem;
+            color: white;
+            position: relative;
+        }
+        
+        .slider-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 60%, rgba(15, 23, 42, 0.7));
+        }
+        
+        .slider-content {
+            position: relative;
+            z-index: 2;
+            max-width: 480px;
+        }
+        
+        /* ==================== THỜI TIẾT SECTION ==================== */
+        .weather-card {
+            max-width: 420px;
+            margin: 0 auto;
+            background: var(--card-bg-light);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark .weather-card {
+            background: var(--card-bg-dark);
+        }
+        
+        .weather-main {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 54px;
+            height: 54px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* ==================== MODAL POPUP ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: modalPop 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 820px;
+            width: 90%;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body.dark .modal-content {
+            background: #1e2937;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* ==================== MOBILE MENU ==================== */
+        .mobile-menu {
+            position: fixed;
+            top: 76px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 76px);
+            background: rgba(255,255,255,0.98);
+            z-index: 1100;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.dark .mobile-menu {
+            background: rgba(15, 23, 42, 0.98);
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-menu a {
+            padding: 1rem 0;
+            font-size: 1.3rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: inherit;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
 </head>
-<body class="bg-stone-50 dark:bg-zinc-950 text-stone-900 dark:text-stone-100">
-
-  <!-- PROGRESS BAR -->
-  <div id="progressBar"></div>
-
-  <!-- NAVBAR -->
-  <nav class="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg border-b sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-5 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 text-3xl font-bold title-font tracking-tighter">
-        ⛰️ <span class="text-[#e85d26]">Núi Bà Đen</span>
-      </a>
-
-      <div class="hidden md:flex items-center gap-8 text-lg font-medium">
-        <a href="#intro" class="hover:text-[#e85d26]">Giới thiệu</a>
-        <a href="#experiences" class="hover:text-[#e85d26]">Trải nghiệm</a>
-        <a href="#gallery" class="hover:text-[#e85d26]">Thư viện</a>
-        <a href="#timeline" class="hover:text-[#e85d26]">Hành trình</a>
-        <a href="#map" class="hover:text-[#e85d26]">Bản đồ</a>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <button id="themeToggle" class="w-10 h-10 flex items-center justify-center text-2xl">☀️</button>
-        <button onclick="openBookingModal()" 
-                class="bg-[#e85d26] hover:bg-orange-600 text-white px-8 py-3.5 rounded-3xl font-semibold flex items-center gap-2 text-lg">
-          Đặt vé ngay <span class="text-xl">🚡</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO – ảnh thật, chữ to -->
-  <section id="hero" class="hero flex items-center relative">
-    <div class="container mx-auto px-6 text-center text-white z-10">
-      <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-6 py-3 rounded-3xl mb-8 text-sm tracking-widest">
-        TÂY NINH • VIỆT NAM
-      </div>
-      <h1 class="title-font max-w-4xl mx-auto leading-none mb-6">
-        NÚI BÀ ĐEN<br>
-        <span class="text-5xl text-[#ffd580]">Nóc nhà Nam Bộ</span>
-      </h1>
-      <p class="max-w-xl mx-auto text-2xl mb-12 opacity-90">
-        986m linh khí • Cáp treo hiện đại • Chùa Bà thiêng liêng • Thiên nhiên hoang sơ
-      </p>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a onclick="openBookingModal()" 
-           class="bg-white text-stone-900 hover:bg-amber-200 px-12 py-6 rounded-3xl text-2xl font-semibold flex items-center gap-4">
-          Khám phá ngay
-          <span class="text-3xl">→</span>
-        </a>
-        <a href="#gallery" class="border-2 border-white hover:bg-white/10 px-12 py-6 rounded-3xl text-2xl font-medium">Xem ảnh đẹp</a>
-      </div>
-
-      <!-- Stats to -->
-      <div class="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center">
-        <div>
-          <div class="text-6xl font-bold text-[#ffd580]">986</div>
-          <div class="text-sm tracking-widest mt-2">MÉT ĐỘ CAO</div>
-        </div>
-        <div>
-          <div class="text-6xl font-bold text-[#ffd580]">3</div>
-          <div class="text-sm tracking-widest mt-2">TUYẾN CÁP TREO</div>
-        </div>
-        <div>
-          <div class="text-6xl font-bold text-[#ffd580]">1.2M+</div>
-          <div class="text-sm tracking-widest mt-2">DU KHÁCH/NĂM</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTRO -->
-  <section id="intro" class="py-24 bg-white dark:bg-zinc-900">
-    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <span class="uppercase text-[#e85d26] tracking-[2px] text-lg">Về Núi Bà Đen</span>
-        <h2 class="title-font text-5xl leading-none mt-3 mb-8">Linh thiêng giữa lòng Nam Bộ</h2>
-        <p class="text-2xl text-stone-600 dark:text-stone-400">
-          Ngọn núi cao nhất đồng bằng Nam Bộ (986m) – nơi hội tụ huyền thoại Bà Lý Thị Thiên Hương và không khí trong lành bậc nhất.
-        </p>
-        <div class="mt-12 flex flex-wrap gap-8">
-          <div class="flex gap-4">
-            <div class="text-4xl">🏔️</div>
-            <div>
-              <strong class="text-xl">Đá granit độc đáo</strong>
-              <p class="text-lg text-stone-500">Nổi bật giữa đồng bằng bằng phẳng</p>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header id="header">
+        <nav>
+            <!-- Logo -->
+            <a href="#" class="logo">
+                🏔️ <span>Núi Bà Đen</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#gioi-thieu">Giới thiệu</a></li>
+                <li><a href="#kham-pha">Khám phá</a></li>
+                <li><a href="#thu-vien-anh">Thư viện ảnh</a></li>
+                <li><a href="#lien-he">Liên hệ</a></li>
+            </ul>
+            
+            <div class="header-actions">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Chuyển chế độ sáng/tối">🌞</button>
+                
+                <!-- Hamburger -->
+                <button id="hamburger" class="hamburger" aria-label="Menu di động">☰</button>
             </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="text-4xl">🛕</div>
-            <div>
-              <strong class="text-xl">Di tích quốc gia</strong>
-              <p class="text-lg text-stone-500">Trung tâm tâm linh lớn nhất phương Nam</p>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <a href="#home" onclick="toggleMobileMenu()">Trang chủ</a>
+            <a href="#gioi-thieu" onclick="toggleMobileMenu()">Giới thiệu</a>
+            <a href="#kham-pha" onclick="toggleMobileMenu()">Khám phá</a>
+            <a href="#thu-vien-anh" onclick="toggleMobileMenu()">Thư viện ảnh</a>
+            <a href="#lien-he" onclick="toggleMobileMenu()">Liên hệ</a>
+            
+            <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                <p style="font-size: 0.95rem; opacity: 0.7;">Núi Bà Đen • Tây Ninh<br>Hotline: 0277 123 4567</p>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="rounded-3xl overflow-hidden shadow-2xl">
-        <img src="https://picsum.photos/id/1016/900/700" alt="Núi Bà Đen xanh tươi" class="w-full h-full object-cover">
-      </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>NÚI BÀ ĐEN</h1>
+            <p class="subtitle">Vẻ đẹp hùng vĩ • Linh thiêng • Bất tận<br>Tây Ninh - Viên ngọc của miền Đông Nam Bộ</p>
+            <a href="#kham-pha" class="cta-button">
+                Khám phá ngay 
+                <span style="font-size: 1.6rem;">→</span>
+            </a>
+            
+            <!-- Visitor counter -->
+            <div style="margin-top: 3rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <div>
+                    <span id="visitor-count" style="font-size: 2.2rem; font-weight: 700; color: #fde047;">2,847,291</span>
+                    <span style="display: block; font-size: 1rem; opacity: 0.9;">du khách đã ghé thăm</span>
+                </div>
+                <div class="stats" style="gap: 1.5rem;">
+                    <div class="stat-item">
+                        <span style="color: #22c55e; font-size: 2rem;">986m</span>
+                        <span style="display: block; font-size: 0.95rem;">độ cao đỉnh núi</span>
+                    </div>
+                    <div class="stat-item">
+                        <span style="color: #0ea5e9; font-size: 2rem;">8 phút</span>
+                        <span style="display: block; font-size: 0.95rem;">cáp treo lên đỉnh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll hint -->
+        <div class="hero-scroll-hint">
+            <div>Cuộn xuống khám phá</div>
+            <div style="font-size: 2rem; margin-top: 4px;">↓</div>
+        </div>
+    </section>
+
+    <!-- ==================== GIỚI THIỆU SECTION ==================== -->
+    <section id="gioi-thieu">
+        <h2 class="section-title animate-on-scroll">Giới thiệu về Núi Bà Đen</h2>
+        <p class="section-subtitle animate-on-scroll">Ngọn núi linh thiêng cao nhất miền Đông Nam Bộ, nơi hòa quyện giữa thiên nhiên hùng vĩ và giá trị văn hóa sâu sắc.</p>
+        
+        <div class="intro-grid">
+            <div class="intro-text animate-on-scroll">
+                <p>Núi Bà Đen nằm tại huyện Tân Biên, tỉnh Tây Ninh, với độ cao 986 mét. Đây là biểu tượng du lịch của vùng đất Tây Ninh, thu hút hàng triệu du khách mỗi năm bởi vẻ đẹp thiên nhiên kỳ vĩ, hệ sinh thái rừng nguyên sinh phong phú và ý nghĩa văn hóa - tôn giáo đặc biệt.</p>
+                <p>Chùa Bà Đen trên núi được coi là một trong những ngôi chùa linh thiêng nhất miền Nam. Từ đỉnh núi, du khách có thể chiêm ngưỡng toàn cảnh đồng bằng Tây Ninh, hồ Dầu Tiếng và thậm chí cả biên giới Campuchia khi thời tiết đẹp.</p>
+                
+                <div class="stats animate-on-scroll" style="margin-top: 2rem;">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1200000">0</span>
+                        <p>du khách/năm</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1600">0</span>
+                        <p>mét chiều dài cáp treo</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="45">0</span>
+                        <p>điểm check-in đẹp</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="animate-on-scroll">
+                <img src="https://picsum.photos/id/1016/800/620" alt="Núi Bà Đen từ xa" style="width:100%; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== KHÁM PHÁ SECTION ==================== -->
+    <section id="kham-pha" style="background: linear-gradient(180deg, #f8fafc, #ecfdf5);">
+        <h2 class="section-title animate-on-scroll">Các khu vực nổi bật</h2>
+        <p class="section-subtitle animate-on-scroll">Những trải nghiệm không thể bỏ lỡ khi đến Núi Bà Đen</p>
+        
+        <div class="explore-grid">
+            <!-- Card 1 -->
+            <div class="card animate-on-scroll">
+                <img src="https://picsum.photos/id/1015/800/600" alt="Cáp treo Núi Bà Đen">
+                <div class="card-content">
+                    <h3>🚠 Cáp treo hiện đại</h3>
+                    <p>Hệ thống cáp treo dài nhất Đông Nam Á (1.6km). Chỉ 8 phút để lên đến đỉnh núi, ngắm toàn cảnh thiên nhiên hùng vĩ.</p>
+                    <span style="color: var(--primary-green); font-weight: 600; font-size: 0.95rem;">Giá vé: 180.000 VNĐ</span>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card animate-on-scroll">
+                <img src="https://picsum.photos/id/133/800/600" alt="Chùa Bà Đen">
+                <div class="card-content">
+                    <h3>🛕 Chùa Bà Đen</h3>
+                    <p>Ngôi chùa linh thiêng nằm giữa núi, được xây dựng từ thế kỷ 18. Nơi hành hương nổi tiếng của Phật giáo miền Nam.</p>
+                    <span style="color: var(--primary-blue); font-weight: 600; font-size: 0.95rem;">Linh thiêng &amp; yên bình</span>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card animate-on-scroll">
+                <img src="https://picsum.photos/id/201/800/600" alt="Đỉnh Núi Bà Đen">
+                <div class="card-content">
+                    <h3>🏔️ Đỉnh núi 986m</h3>
+                    <p>Điểm cao nhất với tầm nhìn 360°. Không gian thoáng đãng, gió mát và những tảng đá kỳ vĩ.</p>
+                    <span style="color: #f59e0b; font-weight: 600; font-size: 0.95rem;">Hoàng hôn đẹp nhất Tây Ninh</span>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="card animate-on-scroll">
+                <img src="https://picsum.photos/id/1005/800/600" alt="Hoàng hôn Núi Bà Đen">
+                <div class="card-content">
+                    <h3>🌅 Cảnh hoàng hôn</h3>
+                    <p>Khoảnh khắc vàng rực rỡ khi mặt trời lặn sau dãy núi. Một trong những điểm ngắm hoàng hôn đẹp nhất Việt Nam.</p>
+                    <span style="color: var(--accent-yellow); font-weight: 600; font-size: 0.95rem;">Trải nghiệm độc đáo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TIMELINE SECTION ==================== -->
+    <section>
+        <h2 class="section-title animate-on-scroll">Lịch sử &amp; Trải nghiệm du lịch</h2>
+        <div class="timeline animate-on-scroll">
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Thế kỷ XVIII</h4>
+                    <p><strong>Huyền thoại Bà Đen</strong><br>Chuyện kể về người con gái đẹp đã hóa thân thành núi để bảo vệ vùng đất Tây Ninh.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Năm 1840</h4>
+                    <p><strong>Xây dựng chùa đầu tiên</strong><br>Chùa Bà Đen được khởi công, trở thành trung tâm hành hương lớn của miền Nam.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Năm 2012</h4>
+                    <p><strong>Cáp treo đi vào hoạt động</strong><br>Hệ thống cáp treo hiện đại được khánh thành, mở ra kỷ nguyên du lịch mới cho Núi Bà Đen.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Hiện nay</h4>
+                    <p><strong>Điểm du lịch quốc gia</strong><br>Hàng triệu du khách ghé thăm mỗi năm. Được công nhận là di tích lịch sử - văn hóa cấp quốc gia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== THƯ VIỆN ẢNH + SLIDER ==================== -->
+    <section id="thu-vien-anh" style="background: #ecfdf5;">
+        <h2 class="section-title animate-on-scroll">Thư viện ảnh</h2>
+        <p class="section-subtitle animate-on-scroll">Những khoảnh khắc đẹp nhất của Núi Bà Đen</p>
+        
+        <!-- Featured Auto Slider -->
+        <div class="featured-slider animate-on-scroll" id="slider">
+            <div class="slider-container" id="slider-container">
+                <!-- Slide 1 -->
+                <div class="slider-slide" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
+                    <div class="slider-content">
+                        <h3 style="font-size: 2.2rem; margin-bottom: 8px;">Cáp treo giữa mây trời</h3>
+                        <p>Hành trình 8 phút đầy kỳ diệu lên đỉnh núi</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slider-slide" style="background-image: url('https://picsum.photos/id/133/1920/1080');">
+                    <div class="slider-content">
+                        <h3 style="font-size: 2.2rem; margin-bottom: 8px;">Chùa Bà giữa rừng xanh</h3>
+                        <p>Không gian linh thiêng hòa quyện thiên nhiên</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slider-slide" style="background-image: url('https://picsum.photos/id/1005/1920/1080');">
+                    <div class="slider-content">
+                        <h3 style="font-size: 2.2rem; margin-bottom: 8px;">Hoàng hôn rực rỡ</h3>
+                        <p>Màu vàng óng ả bao trùm cả vùng trời Tây Ninh</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider controls -->
+            <button onclick="prevSlide()" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; width:50px; height:50px; border-radius:50%; font-size:1.8rem; z-index:10; box-shadow:0 4px 15px rgba(0,0,0,0.2);">‹</button>
+            <button onclick="nextSlide()" style="position:absolute; right:20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; width:50px; height:50px; border-radius:50%; font-size:1.8rem; z-index:10; box-shadow:0 4px 15px rgba(0,0,0,0.2);">›</button>
+        </div>
+        
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(0)">
+                <img src="https://picsum.photos/id/1015/600/400" alt="Cáp treo">
+                <div class="gallery-overlay">Cáp treo giữa mây</div>
+            </div>
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(1)">
+                <img src="https://picsum.photos/id/133/600/400" alt="Chùa Bà">
+                <div class="gallery-overlay">Chùa Bà linh thiêng</div>
+            </div>
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(2)">
+                <img src="https://picsum.photos/id/201/600/400" alt="Đỉnh núi">
+                <div class="gallery-overlay">Đỉnh núi 986m</div>
+            </div>
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(3)">
+                <img src="https://picsum.photos/id/1005/600/400" alt="Hoàng hôn">
+                <div class="gallery-overlay">Hoàng hôn huyền ảo</div>
+            </div>
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(4)">
+                <img src="https://picsum.photos/id/1016/600/400" alt="Rừng nguyên sinh">
+                <div class="gallery-overlay">Rừng nguyên sinh</div>
+            </div>
+            <div class="gallery-card animate-on-scroll" onclick="showPopup(5)">
+                <img src="https://picsum.photos/id/870/600/400" alt="Tầm nhìn từ đỉnh">
+                <div class="gallery-overlay">Tầm nhìn từ đỉnh núi</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== THỜI TIẾT SECTION ==================== -->
+    <section id="thoi-tiet" style="padding: 80px 2rem;">
+        <h2 class="section-title animate-on-scroll">Thời tiết hiện tại tại Núi Bà Đen</h2>
+        <div class="weather-card animate-on-scroll">
+            <div class="weather-main">☀️</div>
+            <h3 style="font-size: 3rem; font-weight: 700;">28°C</h3>
+            <p style="font-size: 1.4rem; margin-bottom: 1rem;">Trời nắng đẹp • Gió nhẹ 8 km/h</p>
+            
+            <div style="display: flex; justify-content: space-around; margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">
+                <div>
+                    <div style="font-size: 1.8rem;">🌅</div>
+                    <p><strong>Hoàng hôn</strong><br>18:42</p>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem;">🌡️</div>
+                    <p><strong>Cảm giác</strong><br>30°C</p>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem;">💧</div>
+                    <p><strong>Độ ẩm</strong><br>62%</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--primary-green);">
+                ★ Điều kiện lý tưởng để đi cáp treo và ngắm hoàng hôn
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== LIÊN HỆ SECTION ==================== -->
+    <section id="lien-he" style="background: linear-gradient(180deg, #f8fafc, #ecfdf5);">
+        <h2 class="section-title animate-on-scroll">Liên hệ &amp; Đặt vé</h2>
+        <p class="section-subtitle animate-on-scroll">Hãy để chúng tôi đồng hành cùng hành trình của bạn đến Núi Bà Đen</p>
+        
+        <div style="max-width: 720px; margin: 0 auto; background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            <form style="display: grid; gap: 1.5rem;" onsubmit="handleSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" placeholder="Họ và tên" required style="padding: 14px 18px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <input type="tel" placeholder="Số điện thoại" required style="padding: 14px 18px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                </div>
+                <input type="email" placeholder="Email" style="padding: 14px 18px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <textarea placeholder="Bạn muốn biết thêm thông tin gì về Núi Bà Đen?" rows="4" style="padding: 14px 18px; border-radius: 12px; border: 1px solid #e2e8f0; resize: vertical;"></textarea>
+                
+                <button type="submit" style="background: linear-gradient(90deg, #22c55e, #0ea5e9); color: white; padding: 16px; font-size: 1.1rem; font-weight: 600; border-radius: 9999px; border: none; cursor: pointer;">Gửi thông tin</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 2rem; font-size: 0.95rem; opacity: 0.7;">
+                📍 Địa chỉ: Thị trấn Tân Biên, Tây Ninh<br>
+                📞 Hotline: 0277 123 4567 | 📧 info@nuibaden.vn
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">🏔️ Núi Bà Đen</div>
+                <p style="margin-top: 1rem; max-width: 300px;">Nơi hội tụ thiên nhiên hùng vĩ và giá trị văn hóa bất diệt của Tây Ninh. Chúng tôi mang đến trải nghiệm du lịch đẳng cấp và bền vững.</p>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; font-size: 1.6rem;">
+                    <span>📸</span><span>📘</span><span>📱</span>
+                </div>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem;">Khám phá</h4>
+                <p>Cáp treo</p>
+                <p>Chùa Bà Đen</p>
+                <p>Đỉnh núi</p>
+                <p>Hoàng hôn</p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem;">Thông tin</h4>
+                <p>Lịch sử núi</p>
+                <p>Thời tiết</p>
+                <p>Hướng dẫn di chuyển</p>
+                <p>Đặt vé online</p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem;">Liên hệ</h4>
+                <p>☎️ 0277 123 4567</p>
+                <p>🌐 www.nuibaden.vn</p>
+                <p>📍 Tân Biên, Tây Ninh</p>
+                <p style="margin-top: 1.5rem;">© 2026 Núi Bà Đen. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()" aria-label="Lên đầu trang">↑</button>
+
+    <!-- ==================== MODAL POPUP ==================== -->
+    <div id="popup-modal" class="modal" onclick="if(event.target === this) hidePopup()">
+        <div class="modal-content" onclick="event.stopImmediatePropagation()">
+            <button class="modal-close" onclick="hidePopup()">✕</button>
+            
+            <div id="popup-image" style="height: 380px; background-size: cover; background-position: center;"></div>
+            
+            <div style="padding: 2rem;">
+                <h3 id="popup-title" style="margin-bottom: 1rem;"></h3>
+                <p id="popup-desc" style="line-height: 1.7; font-size: 1.1rem;"></p>
+                
+                <button onclick="hidePopup()" style="margin-top: 2rem; background: var(--primary-green); color: white; padding: 12px 32px; border-radius: 9999px; border: none; font-weight: 600;">Đóng</button>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- EXPERIENCES – card to vừa, ảnh đẹp -->
-  <section id="experiences" class="py-24 bg-stone-100 dark:bg-zinc-950">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16">
-        <span class="uppercase text-[#e85d26]">Trải nghiệm</span>
-        <h2 class="title-font text-5xl mt-3">Điều tuyệt vời đang chờ bạn</h2>
-      </div>
+    <script>
+        /**
+         * MAIN JAVASCRIPT FILE
+         * Tất cả tương tác được viết sạch sẽ, có comment giải thích
+         * Code hoàn chỉnh trong 1 file duy nhất
+         */
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Card 1 -->
-        <div onclick="showDetail(1)" class="exp-card bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
-          <img src="https://picsum.photos/id/1005/600/400" alt="Cáp treo Núi Bà Đen" class="w-full h-64 object-cover">
-          <div class="p-8">
-            <div class="text-5xl mb-4">🚡</div>
-            <h3 class="text-3xl font-semibold mb-3">Cáp treo hiện đại</h3>
-            <p class="text-xl text-stone-600 dark:text-stone-400">15 phút lên đỉnh, ngắm toàn cảnh đồng bằng mênh mông.</p>
-          </div>
-        </div>
+        // ==================== THEME TOGGLE ====================
+        function initTheme() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark');
+                toggleBtn.innerHTML = '🌙';
+            }
+            
+            toggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                
+                if (document.body.classList.contains('dark')) {
+                    toggleBtn.innerHTML = '🌙';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    toggleBtn.innerHTML = '🌞';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        }
 
-        <!-- Card 2 -->
-        <div onclick="showDetail(2)" class="exp-card bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
-          <img src="https://picsum.photos/id/1018/600/400" alt="Leo núi Núi Bà Đen" class="w-full h-64 object-cover">
-          <div class="p-8">
-            <div class="text-5xl mb-4">🥾</div>
-            <h3 class="text-3xl font-semibold mb-3">Leo núi chinh phục</h3>
-            <p class="text-xl text-stone-600 dark:text-stone-400">4–6 giờ giữa rừng xanh, thử thách bản thân.</p>
-          </div>
-        </div>
+        // ==================== MOBILE HAMBURGER MENU ====================
+        function initMobileMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                // Đổi icon hamburger
+                if (mobileMenu.classList.contains('active')) {
+                    hamburger.innerHTML = '✕';
+                } else {
+                    hamburger.innerHTML = '☰';
+                }
+            });
+        }
+        
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.remove('active');
+            document.getElementById('hamburger').innerHTML = '☰';
+        }
 
-        <!-- Card 3 -->
-        <div onclick="showDetail(3)" class="exp-card bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
-          <img src="https://picsum.photos/id/133/600/400" alt="Chùa Bà Núi Bà Đen" class="w-full h-64 object-cover">
-          <div class="p-8">
-            <div class="text-5xl mb-4">🛕</div>
-            <h3 class="text-3xl font-semibold mb-3">Chùa Bà linh thiêng</h3>
-            <p class="text-xl text-stone-600 dark:text-stone-400">Thắp hương, cầu bình an tại quần thể chùa nổi tiếng.</p>
-          </div>
-        </div>
+        // ==================== PARALLAX HERO ====================
+        function initParallax() {
+            const hero = document.querySelector('.hero');
+            
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                // Tạo hiệu ứng parallax mượt cho background
+                if (hero) {
+                    const offset = scrollY * 0.4;
+                    hero.style.setProperty('--offset', `${offset}px`);
+                    hero.style.backgroundPositionY = `calc(50% + ${offset}px)`;
+                }
+            });
+        }
 
-        <!-- Card 4 -->
-        <div onclick="showDetail(4)" class="exp-card bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
-          <img src="https://picsum.photos/id/201/600/400" alt="Hoàng hôn Núi Bà Đen" class="w-full h-64 object-cover">
-          <div class="p-8">
-            <div class="text-5xl mb-4">📸</div>
-            <h3 class="text-3xl font-semibold mb-3">Check-in cảnh đẹp</h3>
-            <p class="text-xl text-stone-600 dark:text-stone-400">Bình minh & hoàng hôn tuyệt đẹp trên đỉnh núi.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        // ==================== SCROLL ANIMATIONS (Intersection Observer) ====================
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+            
+            elements.forEach(el => observer.observe(el));
+        }
 
-  <!-- GALLERY – ảnh thật, grid đẹp -->
-  <section id="gallery" class="py-24">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-12">
-        <span class="uppercase text-[#e85d26]">Thư viện ảnh</span>
-        <h2 class="title-font text-5xl mt-3">Khoảnh khắc đẹp nhất</h2>
-      </div>
+        // ==================== VISITOR COUNTER ANIMATION ====================
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                let count = 0;
+                const increment = Math.ceil(target / 60); // ~60 frames
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = count.toLocaleString('vi-VN');
+                }, 30);
+            });
+            
+            // Counter du khách tổng
+            const visitorEl = document.getElementById('visitor-count');
+            let visitorCount = 2847291;
+            setInterval(() => {
+                visitorCount += Math.floor(Math.random() * 7) + 3;
+                visitorEl.textContent = visitorCount.toLocaleString('vi-VN');
+            }, 2800);
+        }
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/1015/800/800" alt="Bình minh Núi Bà Đen" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/1005/800/800" alt="Cáp treo giữa mây" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/133/800/800" alt="Chùa Bà lúc hoàng hôn" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/201/800/800" alt="Mây mù bao phủ đỉnh núi" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/1016/800/800" alt="Toàn cảnh đồng bằng từ đỉnh" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-        <img onclick="viewImage(this)" src="https://picsum.photos/id/870/800/800" alt="Lễ hội Xuân Núi Bà Đen" class="gallery-img w-full aspect-square object-cover rounded-3xl cursor-zoom-in">
-      </div>
-    </div>
-  </section>
+        // ==================== AUTO SLIDER ====================
+        let currentSlide = 0;
+        const totalSlides = 3;
+        
+        function initSlider() {
+            const container = document.getElementById('slider-container');
+            
+            // Tự động chuyển slide mỗi 4 giây
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                container.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }, 4000);
+        }
+        
+        function nextSlide() {
+            const container = document.getElementById('slider-container');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        
+        function prevSlide() {
+            const container = document.getElementById('slider-container');
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
 
-  <!-- TIMELINE, MAP, FAQ, CONTACT giữ cấu trúc cũ nhưng font to hơn và đẹp hơn -->
-  <!-- (Để ngắn gọn, tôi giữ nội dung tương tự nhưng đã tối ưu font + layout) -->
+        // ==================== GALLERY POPUP ====================
+        const galleryData = [
+            {
+                title: "Cáp treo giữa mây trời",
+                desc: "Hệ thống cáp treo hiện đại bậc nhất Đông Nam Á đưa bạn lên đỉnh núi chỉ trong 8 phút. Trên đường đi, bạn sẽ ngắm nhìn toàn cảnh rừng xanh và đồng bằng Tây Ninh bao la.",
+                img: "https://picsum.photos/id/1015/1200/800"
+            },
+            {
+                title: "Chùa Bà Đen linh thiêng",
+                desc: "Ngôi chùa cổ kính nằm giữa núi rừng. Đây là nơi hành hương nổi tiếng, gắn liền với huyền thoại Bà Đen và mang đậm dấu ấn văn hóa tín ngưỡng của người dân miền Nam.",
+                img: "https://picsum.photos/id/133/1200/800"
+            },
+            {
+                title: "Đỉnh núi 986m",
+                desc: "Từ đỉnh núi, bạn có thể chiêm ngưỡng tầm nhìn panorama tuyệt đẹp, bao gồm hồ Dầu Tiếng và cả biên giới Campuchia khi trời trong.",
+                img: "https://picsum.photos/id/201/1200/800"
+            },
+            {
+                title: "Hoàng hôn huyền ảo",
+                desc: "Một trong những điểm ngắm hoàng hôn đẹp nhất Việt Nam. Ánh nắng vàng rực rỡ nhuộm đỏ cả bầu trời và dãy núi.",
+                img: "https://picsum.photos/id/1005/1200/800"
+            },
+            {
+                title: "Rừng nguyên sinh",
+                desc: "Hệ sinh thái rừng nguyên sinh phong phú với nhiều loài thực vật quý hiếm. Không khí trong lành và tiếng chim rừng vang vọng.",
+                img: "https://picsum.photos/id/1016/1200/800"
+            },
+            {
+                title: "Tầm nhìn từ đỉnh núi",
+                desc: "Toàn cảnh Tây Ninh được thu vào tầm mắt. Đây là khoảnh khắc khó quên của mọi du khách khi đến Núi Bà Đen.",
+                img: "https://picsum.photos/id/870/1200/800"
+            }
+        ];
+        
+        function showPopup(index) {
+            const modal = document.getElementById('popup-modal');
+            const imgContainer = document.getElementById('popup-image');
+            const titleEl = document.getElementById('popup-title');
+            const descEl = document.getElementById('popup-desc');
+            
+            const data = galleryData[index];
+            
+            imgContainer.style.backgroundImage = `url('${data.img}')`;
+            titleEl.textContent = data.title;
+            descEl.textContent = data.desc;
+            
+            modal.style.display = 'flex';
+            // Ngăn scroll body khi popup mở
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hidePopup() {
+            const modal = document.getElementById('popup-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-  <!-- FLOATING CTA -->
-  <button onclick="openBookingModal()" 
-          class="fixed bottom-8 right-8 bg-[#e85d26] text-white px-8 py-5 rounded-3xl flex items-center gap-3 shadow-2xl text-xl font-semibold z-50 hover:scale-110">
-    🚡 Đặt vé cáp treo ngay
-  </button>
+        // ==================== BACK TO TOP ====================
+        function initBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 600) {
+                    btn.style.display = 'flex';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-  <!-- BOOKING MODAL -->
-  <div onclick="if(event.target.id==='bookingModal')closeBookingModal()" id="bookingModal" class="hidden fixed inset-0 bg-black/70 z-[99999] items-center justify-center">
-    <div class="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-md mx-4 p-10">
-      <h2 class="text-4xl font-semibold mb-8">Đặt vé cáp treo</h2>
-      <div class="space-y-8">
-        <input type="date" value="2026-04-15" class="w-full border rounded-2xl px-6 py-5 text-xl">
-        <div class="flex gap-4">
-          <button class="flex-1 py-6 border-2 rounded-3xl text-2xl font-medium">1 vé</button>
-          <button class="flex-1 py-6 border-2 rounded-3xl text-2xl font-medium">2 vé</button>
-          <button class="flex-1 py-6 border-2 rounded-3xl text-2xl font-medium">3+ vé</button>
-        </div>
-        <button onclick="fakeBooking()" class="w-full py-7 bg-[#e85d26] text-white text-2xl font-bold rounded-3xl">Xác nhận • 280.000 VNĐ</button>
-      </div>
-    </div>
-  </div>
+        // ==================== FAKE FORM SUBMIT ====================
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            
+            btn.style.transition = 'all 0.3s';
+            btn.textContent = '✅ Đã gửi thành công!';
+            
+            setTimeout(() => {
+                alert('🎉 Cảm ơn bạn! Chúng tôi sẽ liên hệ trong vòng 24h.');
+                btn.textContent = originalText;
+                e.target.reset();
+            }, 1600);
+        }
 
-  <script>
-    // Tailwind
-    tailwind.config = { content: [] }
+        // ==================== SMOOTH SCROLL FOR NAV LINKS ====================
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    // Bỏ qua các link trong mobile menu đã xử lý riêng
+                    if (this.getAttribute('onclick')) return;
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
 
-    // Progress bar
-    window.addEventListener('scroll', () => {
-      const scroll = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)
-      document.getElementById('progressBar').style.transform = `scaleX(${scroll})`
-    })
-
-    // Theme toggle
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark')
-      document.getElementById('themeToggle').innerHTML = isDark ? '☀️' : '☽'
-    })
-
-    function openBookingModal() {
-      document.getElementById('bookingModal').classList.remove('hidden')
-      document.getElementById('bookingModal').classList.add('flex')
-    }
-    function closeBookingModal() {
-      document.getElementById('bookingModal').classList.add('hidden')
-      document.getElementById('bookingModal').classList.remove('flex')
-    }
-    function fakeBooking() {
-      closeBookingModal()
-      alert('🎟️ Vé đã được đặt thành công! Cảm ơn bạn ❤️')
-    }
-
-    function showDetail(n) {
-      const texts = [
-        "", 
-        "Cáp treo dài nhất Việt Nam – chỉ 15 phút lên đỉnh 986m!",
-        "Leo núi 4-6 giờ qua rừng nguyên sinh – thử thách tuyệt vời",
-        "Quần thể chùa Bà linh thiêng – cầu bình an, may mắn",
-        "Hoàng hôn & bình minh trên đỉnh – view 360° đồng bằng"
-      ]
-      alert(texts[n] + "\n\nBạn muốn đặt vé ngay không?")
-      if (confirm("Mở form đặt vé?")) openBookingModal()
-    }
-
-    function viewImage(img) {
-      const modal = document.createElement('div')
-      modal.className = 'fixed inset-0 bg-black/90 z-[99999] flex items-center justify-center p-8'
-      modal.innerHTML = `<img src="${img.src}" class="max-h-[90vh] max-w-[90vw] rounded-3xl shadow-2xl">`
-      modal.onclick = () => modal.remove()
-      document.body.appendChild(modal)
-    }
-
-    // GSAP
-    window.onload = () => {
-      gsap.registerPlugin(ScrollTrigger)
-      document.querySelectorAll('.exp-card, .gallery-img').forEach((el, i) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 60,
-          duration: 1,
-          delay: i * 0.1,
-          scrollTrigger: { trigger: el, start: "top 80%" }
-        })
-      })
-      console.log('%c✅ Giao diện Núi Bà Đen đã được thiết kế lại hoàn toàn!', 'color:#e85d26;font-size:20px')
-    }
-  </script>
+        // ==================== KHỞI CHẠY TOÀN BỘ ỨNG DỤNG ====================
+        window.onload = function() {
+            console.log('%c✅ Website Núi Bà Đen đã được tải thành công!', 'color:#22c55e; font-size:13px; font-weight:700');
+            
+            initTheme();
+            initMobileMenu();
+            initParallax();
+            initScrollAnimations();
+            animateCounters();
+            initSlider();
+            initBackToTop();
+            initSmoothScroll();
+            
+            // Hiệu ứng header khi scroll
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 8px 25px rgba(0,0,0,0.12)';
+                } else {
+                    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+                }
+            });
+            
+            console.log('🌿 Tất cả tính năng đã hoạt động: parallax, dark mode, slider tự động, popup, counter, scroll animation...');
+        };
+    </script>
 </body>
 </html>
